@@ -18,7 +18,7 @@ import {
 import './style.css';
 
 function App() {
-    const [ lista, setLista ] = useState([]); // imutabilidade
+    const [ lista, setLista ] = useState([]); 
     const [ open, setOpen ] = useState(false);
     const [ nome, setNome ] = useState('');
     const [ valormercado, setValormercado ] = useState('');
@@ -69,7 +69,7 @@ function App() {
     }
 
     function deleteEquipe(id){
-        api.delete(`/equipe/${id}`).then((response) => {
+        api.delete(`/equipes/${id}`).then((response) => {
             listaEquipes();
         });
     }
@@ -87,11 +87,11 @@ function App() {
     }
 
     function editar(){
-        api.put(`/equipe/${id}`,{nome:nome,valormercado:valormercado,arena:arena}).then((response) => {
+        api.put(`/equipes/${id}`,{nome:nome,valormercado:valormercado,arena:arena}).then((response) => {
             setOpen(false);
             setNome('');
             setValormercado('');
-            setArena('S');
+            setArena('');
             setId('');
             listaEquipes();
         });
@@ -147,16 +147,16 @@ function App() {
             </Button>
          </Container>
          <Dialog open={open} onClose={closeModal} fullWidth={true} maxWidth="sm">
-            <DialogTitle id="form-dialog-title">Contato</DialogTitle>
+            <DialogTitle id="form-dialog-title">Formulário de cadastro equipe</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Digite os dados do contato.
+                    Digite os dados da equipe
                 </DialogContentText>
                 <TextField
                     autoFocus
                     margin="dense"
                     id="nome"
-                    label="Nome"
+                    label="Nome da Equipe"
                     autoComplete="off"
                     type="text"
                     fullWidth
@@ -166,7 +166,7 @@ function App() {
                 <TextField
                     margin="dense"
                     id="valormercado"
-                    label="Valormercado"
+                    label="Valor de Mercado da Equipe"
                     autoComplete="off"
                     type="text"
                     fullWidth
@@ -178,7 +178,7 @@ function App() {
                  <TextField
                     margin="dense"
                     id="arena"
-                    label="Arena"
+                    label="Arena da equipe"
                     autoComplete="off"
                     type="text"
                     fullWidth
