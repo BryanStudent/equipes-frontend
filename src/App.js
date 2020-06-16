@@ -1,6 +1,9 @@
 import React, { useState, useEffect, Icon } from 'react';
+
 import api from './api';
+
 import Header from './header';
+
 import { 
     Container, 
     Table, 
@@ -15,7 +18,9 @@ import {
     TextField, 
     
     DialogActions} from '@material-ui/core';
+
 import './style.css';
+
 
 function App() {
     const [ lista, setLista ] = useState([]); 
@@ -33,6 +38,10 @@ function App() {
         setBotaoAdicionar(true);
         setBotaoEditar(false);
         setOpen(true);
+        setNome('');
+        setValormercado('');
+        setArena('');
+        setId('');
     };
 
     function closeModal() {
@@ -43,10 +52,13 @@ function App() {
          api.get('/equipes').then((response) => {
             const itens = response.data;
             setLista(itens);
-              setNome('');
-                setValormercado('');
-                 setArena('');
-                setId('');
+
+
+            //limpar dados ao abrir
+            setNome('');
+            setValormercado('');
+            setArena('');
+            setId('');
         });
     }
 
@@ -112,7 +124,7 @@ function App() {
                     </TableRow>
                 </TableHead>
                 {lista.map(itens => (
-                    <TableRow key={itens.id}>
+                    <TableRow  key={itens.id}>
                         <TableCell>{itens.id}</TableCell>
                         <TableCell>{itens.nome}</TableCell>
                         <TableCell>{itens.valormercado}</TableCell>
@@ -126,14 +138,14 @@ function App() {
                                 variant="outlined" 
                                 onClick={() => openEditar(itens.id,itens.nome,itens.valormercado,itens.arena)}
                                 size="small"> 
-                                Editar 
+                                Editar Equipe
                             </Button>
                             &nbsp;
                             <Button 
                                 onClick={() => deleteEquipe(itens.id)}
                                 variant="outlined" 
                                 size="small" 
-                                color="secondary">Apagar</Button>
+                                color="secondary">Apagar Equipe</Button>
                         </TableCell>
                     </TableRow>
                 ))}
